@@ -1,0 +1,13 @@
+require "uri"
+require "net/http"
+
+url = URI("https://test-middleware.clarodrive.com/api/v2/region?region")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Cookie"] = "PHPSESSID=g2r5rfa0rgv3r7mnem7o1ukp44; HKS=d8ccac076fadbbe73e98bbf0958f20cb7490c37c052e026d3e7731e18f1eb958"
+
+response = https.request(request)
+puts response.read_body
