@@ -1,0 +1,26 @@
+var mockServerClient = require('mockserver-client').mockServerClient;
+mockServerClient("localhost", 1080).mockAnyResponse({
+    "httpRequest": {
+        "method": "GET",
+        "path": "/api/v2/region?region=mexico",
+    },
+    "httpResponse": {
+        "statusCode": 200,
+        "body":
+///////////////////////
+{
+    "result": {
+    "region": "mexico"
+}
+}
+///////////////////////
+    
+}
+}).then(
+    function () {
+        console.log("region_mexico_ok");
+    },
+    function (error) {
+        console.log(error);
+    }
+);
